@@ -47,6 +47,11 @@ def landing_page():
     return app.send_static_file("index.html")
 
 
+@app.route(API_PATH + "enroll/", methods=["POST"])
+def enroll():
+    pass
+
+
 @app.route(API_PATH + "enroll/<key>", methods=["POST"])
 def confirm_enroll():
     return "I don't know how to confirm enrollment"
