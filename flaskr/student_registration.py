@@ -51,6 +51,7 @@ def landing_page():
 def enroll():
     return "RIP"
 
+
 @app.route(API_PATH + "enroll/<key>")
 def confirm_enroll():
     return "I don't know how to confirm enrollment"
