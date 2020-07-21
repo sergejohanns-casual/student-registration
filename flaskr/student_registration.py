@@ -20,16 +20,10 @@ class Activity(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.Text, unique=True, nullable=False)
 
-    def __repr__(self):
-        return "<Activity {}: {}>".format(self.id, self.name)
-
 
 class User(db.Model):
     id = db.Column(db.Text, primary_key=True)
     email = db.Column(db.Text, unique=True, nullable=False)
-
-    def __repr__(self):
-        return "<Student {}>".format(self.id)
 
 
 class TempEnrollment(db.Model):
@@ -42,9 +36,6 @@ class Enrollment(db.Model):
     id = db.Column(db.Text, primary_key=True)
     activity_id = db.Column(db.Integer, db.ForeignKey("activity.id"))
     user_id = db.Column(db.Text, db.ForeignKey("user.id"))
-
-    def __repr__(self):
-        return "<Enrollment: user {} in activity {}>".format(self.user_id, self.activity_id)
 
 
 db.create_all()
