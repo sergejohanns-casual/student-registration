@@ -1,7 +1,8 @@
+import http
 import secrets
 from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
-from werkzeug.exceptions import BadRequest
+from werkzeug.exceptions import BadRequest, UnprocessableEntity
 
 
 app = Flask(
@@ -56,13 +57,16 @@ def index_page():
 @app.route(API_PATH + "enroll/", methods=["POST"])
 def enroll():
     data = request.json
-    if data is None or "id" not in data or "activity" not in data:
+    if data is None or "user" not in data or "activity" not in data:
         raise BadRequest
-    uid, aid = data["id"], data["activity"]
-    user = User.query.filter_by(id=uid).first_or_404()
-    activity = Activity.query.filter_by(id=aid).first_or_404()
+    uid, aid = data["user"], data["activity"]
+    user = User.query.filter_by(id=uid).first()
+    activity = Activity.query.filter_by(id=aid).first()
+    if user is None or activity is None:
+        raise UnprocessableEntity
     db.session.add(TempEnrollment(id=gen_key(user, activity), user_id=user.id, activity_id=activity.id))
     db.session.commit()
+    return '', http.HTTPStatus.NO_CONTENT
 
 
 @app.route(API_PATH + "enroll/<key>", methods=["POST"])
@@ -71,3 +75,4 @@ def confirm_enroll():
     db.session.remove(temp)
     db.session.add(Enrollment(id=temp.id, user_id=temp.user_id, activity_id=temp.activity_id))
     db.session.commit()
+    return '', http.HTTPStatus.NO_CONTENT
