@@ -57,8 +57,10 @@ def index_page():
 @app.route(API_PATH + "enroll/", methods=["POST"])
 def enroll():
     data = request.json
-    if data is None or "user" not in data or "activity" not in data:
+    if data is None:
         raise BadRequest
+    elif "user" not in data or "activity" not in data:
+        raise UnprocessableEntity
     uid, aid = data["user"], data["activity"]
     user = User.query.filter_by(id=uid).first()
     activity = Activity.query.filter_by(id=aid).first()
