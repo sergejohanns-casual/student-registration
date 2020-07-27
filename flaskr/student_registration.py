@@ -1,3 +1,4 @@
+import json
 import http
 import secrets
 from flask import Flask, request
@@ -15,6 +16,13 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///test.db"
 db = SQLAlchemy(app)
 
 API_PATH = "/api/"
+CREDENTIALS_FILE = "credentials.json"
+with open(CREDENTIALS_FILE, 'r') as cred_file:
+    data = json.load(cred_file)
+    EMAIL_CLIENT = data["client"]
+    EMAIL_PORT = data["port"]
+    SENDER_ADDRESS = data["address"]
+    SENDER_PASSWORD = data["password"]
 
 
 class Activity(db.Model):
