@@ -80,6 +80,11 @@ def index_page():
     return app.send_static_file("index.html")
 
 
+@app.route("/enroll")
+def enroll_page():
+    return app.send_static_file("enroll.html")
+
+
 @app.route(API_PATH + "enroll/", methods=["POST"])
 def enroll():
     data = request.json
