@@ -1,6 +1,4 @@
-console.log("new");
 const queryParamString = window.location.search;
-console.log(queryParamString);
 const urlParams = new URLSearchParams(queryParamString);
 const API_CONFIRM_ENROLL = window.location.origin + "/api/enroll/";
 const textField = document.getElementById("result");
