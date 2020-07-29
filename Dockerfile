@@ -3,4 +3,4 @@ COPY . .
 RUN pip install -r requirements.txt
 WORKDIR /flaskr
 EXPOSE 5000
-CMD export FLASK_APP=student_registration.py && flask run
+CMD export FLASK_APP=student_registration.py && flask run --host=0.0.0.0
