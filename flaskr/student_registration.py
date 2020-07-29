@@ -4,7 +4,7 @@ import string
 import secrets
 
 import yagmail
-from flask import Flask, request
+from flask import Flask, request, render_template
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.exceptions import BadRequest, UnprocessableEntity
 
@@ -77,12 +77,12 @@ def send_mail(email, key, activity):
 
 @app.route("/")
 def index_page():
-    return app.send_static_file("index.html")
+    return render_template("index.html")
 
 
 @app.route("/enroll")
 def enroll_page():
-    return app.send_static_file("enroll.html")
+    return render_template("enroll.html")
 
 
 @app.route(API_PATH + "enroll/", methods=["POST"])
@@ -105,9 +105,9 @@ def enroll():
 
 
 @app.route(API_PATH + "enroll/<key>", methods=["POST"])
-def confirm_enroll():
-    temp = TempEnrollment.query.filter_by(id=request.args.get("key")).first_or_404()
-    db.session.remove(temp)
+def confirm_enroll(key):
+    temp = TempEnrollment.query.filter_by(id=key).first_or_404()
+    db.session.delete(temp)
     db.session.add(Enrollment(id=temp.id, user_id=temp.user_id, activity_id=temp.activity_id))
     db.session.commit()
     return '', http.HTTPStatus.NO_CONTENT
