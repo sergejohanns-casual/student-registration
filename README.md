@@ -7,6 +7,9 @@ This is a practice project, which I made to practice building a webapp with Flas
 ## Operation
 The user goes to the home page and fills in their 'User id', which could take the form of a handle, student number, etc. and the (numerical) id of the activity they would like to enroll in. Activity ids are incremental, so the first activity has id 1, etc. After this the user clicks 'submit' and an email with a confirmation link is sent to the email address associated with the given user id. If the confirmation link is clicked the user is taken to another page where the enrollment is confirmed, and sent a second email containing their ticket (a unique 16-digit hex string).
 
+## Deployment
+To build and deploy the system as a docker container, simply `docker build` on the root of the project and run that image in a container. To run the system locally, pip install from the `requirements.txt` to get the dependencies and `flask run` in the `flaskr` directory, ensuring that `FLASK_APP` is set to `student_registration.py`.
+
 ## Lackings
 Because this is a practice project, more meant to practice the surrounding technologies than making a webapp in general, it is not optimised for usability. There are a couple of really egregious flaws that I could fix in theory, but I already spent considerably more time on this project than I intended. Examples include:
 
