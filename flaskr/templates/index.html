@@ -1,6 +1,20 @@
 <html>
     <head>
-        <title>Lmao</title>
+        <title>Enrollment system</title>
+        <script src="{{url_for('static', filename='enroll.js')}}" defer></script>
+        <link rel="stylesheet" href="{{url_for('static', filename='enroll.css')}}">
     </head>
-    <body>Memes</body>
+    <body>
+        <div id="form">
+            <div class="error"><p id="error-message"></p></div>
+            <div class="grid-container">
+                <div class="grid-item">User id:</div>
+                <div class="grid-item"><input id="user-id"></div>
+                <div class="grid-item">Activity id:</div>
+                <div class="grid-item"><input id="activity-id"></div>
+                <div class="grid-item"></div>
+                <div class="grid-item"><button id="submit" type="submit">submit</button></div>
+            </div>
+        </div>
+    </body>
 </html>

@@ -1,0 +1,10 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 80px auto;
+    grid-gap: 10px;
+}
+
+.error {
+    font-style: italic;
+    color: red;
+}
