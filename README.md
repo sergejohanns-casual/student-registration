@@ -10,6 +10,8 @@ The user goes to the home page and fills in their 'User id', which could take th
 ## Deployment
 To build and deploy the system as a docker container, simply `docker build` on the root of the project and run that image in a container. To run the system locally, pip install from the `requirements.txt` to get the dependencies and `flask run` in the `flaskr` directory, ensuring that `FLASK_APP` is set to `student_registration.py`.
 
+Note that `flask run`, which the docker container also uses, is only meant for development servers. If you are planning to run this system in a production environment you should instead use a suitable application server.
+
 ## Lackings
 Because this is a practice project, more meant to practice the surrounding technologies than making a webapp in general, it is not optimised for usability. There are a couple of really egregious flaws that I could fix in theory, but I already spent considerably more time on this project than I intended. Examples include:
 
